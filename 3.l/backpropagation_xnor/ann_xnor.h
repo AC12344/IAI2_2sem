@@ -25,7 +25,7 @@ const int numberHidden = 1;
 const int numberInput = 2;
 const int numberOutput = 1;
 
-const double BP_LEARNING = 0.01;//0.7
+const double BP_LEARNING = 0.7;
 const double momentum_rate = 0.7;
 
 

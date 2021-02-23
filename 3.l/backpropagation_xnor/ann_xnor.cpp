@@ -149,10 +149,10 @@ double ANN_XNOR::FeedforwardNetwork (double i0, double i1, double d)
 
   //Sigmoid (logistic function)
   error = d-o_Output[0];
-  deltaOutput = o_Output[0]*(1-o_Output[0])*(error); //From output layer
+  deltaOutput = o_Output[0]*(1.-o_Output[0])*(error); //From output layer
 
   //[2] find the delta of the hidden layer
-  deltaHidden[0] = o_Hidden[0]*(1-o_Hidden[0])*(WeightO_H[0][0]*deltaOutput);
+  deltaHidden[0] = o_Hidden[0]*(1.-o_Hidden[0])*(WeightO_H[0][0]*deltaOutput);
 
   //STEP 4: Update weights for Online learning//////////////
 
@@ -208,8 +208,8 @@ double ANN_XNOR::FeedforwardNetwork (double i0, double i1, double d)
 // ----------------------------------------------------------------------
 double ANN_XNOR::Run(double i0, double i1)
 {
-  
-
+	
+/* weight given by our prof
   WeightH_B[0] = 2.64;
   WeightH_I[0][0] = -7.092;
   WeightH_I[0][1] = -7.09;
@@ -217,6 +217,16 @@ double ANN_XNOR::Run(double i0, double i1)
   WeightO_I[0][1] = 5.135;
   WeightO_B[0] = -7.834;
   WeightO_H[0][0]= 11.575;
+*/	
+	// my weights
+  WeightH_B[0] = 1.959647; //2.424199;
+  WeightH_I[0][0] = -5.669322; //-4.443602 ;
+  WeightH_I[0][1] = -5.673477; // 5.098291 ;
+  WeightO_I[0][0] = 3.420976; // 2.253122 ;
+  WeightO_I[0][1] = 3.421749; //2.513470 ;
+  WeightO_B[0] = -3.610359; //-7.858320 ;
+  WeightO_H[0][0]= 8.041114; //5.410316;
+
 
   ///////////////Start ///////////////////////////////////////////
 
@@ -236,7 +246,7 @@ double ANN_XNOR::Run(double i0, double i1)
   // Now, calculate the net for the final output layer.
   a_Output[0] = BiasO[0] * WeightO_B[0] + o_Hidden[0] * WeightO_H[0][0] + Input[0] * WeightO_I[0][0] + Input[1] * WeightO_I[0][1];
 
-  o_Output[0] = step(a_Output[0]);//sigmoid(a_Output[0]);
+  o_Output[0]= step(a_Output[0]);//sigmoid(a_Output[0]);
 
 
   printf( "I1:%f I2:%f Out:%f \n",Input[0], Input[1], o_Output[0]);
@@ -257,7 +267,7 @@ double ANN_XNOR::tanh(double num)
 
 double ANN_XNOR::step(double num)
 {
-	if(num >= 0)
+	if(num >= 0.5)
 		return 1;
 	else
 		return 0;
