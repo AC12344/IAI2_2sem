@@ -70,6 +70,8 @@ acs-*.bib
 # cprotect
 *.cpt
 
+#Makefile
+*.o
 # elsarticle (documentclass of Elsevier journals)
 *.spl
 
